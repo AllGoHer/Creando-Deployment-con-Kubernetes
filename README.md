@@ -1,4 +1,4 @@
-# CREANDO DEPLOYMENT EN KUBERNETES(N8N)![image](https://github.com/user-attachments/assets/761442a3-01b0-45cb-b40a-26cf7121706b) ![image](https://github.com/user-attachments/assets/bd5c8a79-7d38-41b0-b4a4-318b4a5ae80c)
+# CREANDO DEPLOYMENT EN KUBERNETES(N8N)  ![image](https://github.com/user-attachments/assets/761442a3-01b0-45cb-b40a-26cf7121706b) ![image](https://github.com/user-attachments/assets/bd5c8a79-7d38-41b0-b4a4-318b4a5ae80c)
 
                                                                                 
 _______________________________________________________________________________________________________________________________________________________________________________________________________________
