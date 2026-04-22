@@ -18,15 +18,15 @@ CREANDO DEPLOYMENT EN KUBERNETES(N8N)
 
 •	Primero vamos a Docker Desktop y hacemos click en icono de configuraciones
  
-![image](https://github.com/user-attachments/assets/6b58c1d0-333e-4270-82af-5856b35e1903)
+![image](https://github.com/user-attachments/assets/dfa56947-e049-4974-8140-ec07b694dc56)
 
 •	Y luego damos click en donde dice kubernetes, lo habilitamos y, damos click en aplicar e instalar.
 
-![image](https://github.com/user-attachments/assets/96655518-e10e-4f05-a3ea-764f2e67a7b8) 
+![image](https://github.com/user-attachments/assets/033cb8e7-030d-422e-a13f-b9e90a42b500) 
 
 •	Luego verificamos que este activado
 
- ![image](https://github.com/user-attachments/assets/2a39fe45-e3de-4c34-9739-f6ddf7e7a4cb)
+ ![image](https://github.com/user-attachments/assets/5a0e8880-2e73-4d46-9c21-f1f5df5b6e70)
 
 •	Ahora salimos del área de configuración y nos vamos a imágenes.
 
