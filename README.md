@@ -1,7 +1,7 @@
-                                                                       # Creando-Deployment-en-Kubernetes   
+          ![image](https://github.com/user-attachments/assets/761442a3-01b0-45cb-b40a-26cf7121706b)   ![image](https://github.com/user-attachments/assets/bd5c8a79-7d38-41b0-b4a4-318b4a5ae80c)
 
-![image](https://github.com/user-attachments/assets/761442a3-01b0-45cb-b40a-26cf7121706b)   ![image](https://github.com/user-attachments/assets/bd5c8a79-7d38-41b0-b4a4-318b4a5ae80c)
-__________________________________________________________________________________________________________________________________________________________________________________________________________________
+                                                                                # CREANDO DEPLOYMENT EN KUBERNETES(N8N)
+_______________________________________________________________________________________________________________________________________________________________________________________________________________
 
 En este Proyecto veremos cómo activar Kubernetes dentro de Docker Desktop y crear un deployment para ejecutar N8N en contenedores. Asimismo, iremos aprendiendo paso a paso a cómo habilitar Kubernetes desde la configuración de Docker, esperar a que el sistema instale los componentes necesarios y verificar que el clúster esté funcionando correctamente antes de comenzar a desplegar servicios.
 
@@ -38,37 +38,69 @@ CREANDO DEPLOYMENT EN KUBERNETES(N8N)
 
 •	Luego damos click derecho al archivo y pegamos el siguiente código: 
 
+
 apiVersion: apps/v1             # versión 1
+
 kind: Deployment                 #Construye el contenedor.
+
 metadata:
+
   name: n8n                           # nombre del contenedor.
+  
 spec:
+
   replicas: 1                            #cantidadde contenedores que deseas correr.
+  
   selector:
+  
     matchLabels:
+    
       app: n8n                          #jala del deployment todo lo de n8n.
+      
   template:
+  
     metadata:
+    
       labels:
+      
         app: n8n                      #el contenedor se llamará n8n.
+        
     spec:
+    
       containers:
+      
       - name: n8n                  # <-- OJO: Empieza con guion y 2 espacios
+      
         image: n8nio/n8n:latest    # <-- 4 espacios desde el margen izquierdo
+        
         ports:
+        
         - containerPort: 5678      # <-- OJO: Empieza con guion y 4 espacios
+        
 ---
+
 apiVersion: v1
+
 kind: Service                               # Ejecuta el contenedor.
+
 metadata:
+
   name: n8n-service
+  
 spec:
+
   type: NodePort      # lee los contenedores y saca la información a través de un puerto.
+  
   selector:
+  
     app: n8n
+    
   ports:
+  
   - port: 5678                    # <-- OJO: Empieza con guion y 2 espacios
+    
     targetPort: 5678         #puerto de servicio que va alimentar al NodePort.
+    
     nodePort: 30007
 
 
@@ -79,7 +111,9 @@ spec:
  ![image](https://github.com/user-attachments/assets/33468367-5587-46aa-a88f-a359aed3f5b2)
 
 •	Ahora en la terminal escribimos el siguiente comando: kubectl apply -f n8n.yaml
+
 1.	Kubectl -- llama al ejecutable de Kubernetes.
+   
 2.	Apply  -f   -- vamos aplicar las configuraciones que tenemos en el archivo n8n.yaml
  
 ![image](https://github.com/user-attachments/assets/8f5f0fb6-54c5-4213-918f-137f1d67e42b)
@@ -89,8 +123,11 @@ spec:
  ![image](https://github.com/user-attachments/assets/51466acb-0e45-4e84-a649-510bb1d12507)
 
 •	Por último, podemos ver en el localhost:30007. 
+
 •	Algunas veces en Windows (Docker Desktop), el tipo de servicio NodePort (el puerto 30007) tiene problemas de enrutamiento de red con WSL2. Además, Kubernetes tarda uno o dos minutos en "activar" ese puerto, para ello haremos los siguientes pasos:
+
 1.	Verifica que el Pod esté vivo (Espera a que diga "Running")
+   
 Escribe esto en tu terminal: kubectl get pods
 
 Si ves la palabra Running en la columna STATUS, continúa. Si ves ContainerCreating, espera 30 segundos y vuelve a escribir el comando hasta que diga Running (n8n pesa unos 700MB y tarda en descargar).
@@ -102,6 +139,7 @@ kubectl port-forward service/n8n-service 5678:5678
 (Verás un mensaje que dice "Forwarding from 127.0.0.1:5678..."). Esta terminal se quedará "congelada" o mostrando logs. No la cierres. Mientras esa terminal esté abierta, el túnel está activo).
 
 3.	Ahora, en tu navegador web, NO vayas al 30007. Ve a:
+   
 http://localhost:5678
 
 4.	¡Ahí deberías ver la pantalla de bienvenida de n8n!
