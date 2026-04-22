@@ -1,6 +1,6 @@
-          ![image](https://github.com/user-attachments/assets/761442a3-01b0-45cb-b40a-26cf7121706b)   ![image](https://github.com/user-attachments/assets/bd5c8a79-7d38-41b0-b4a4-318b4a5ae80c)
+# CREANDO DEPLOYMENT EN KUBERNETES(N8N)![image](https://github.com/user-attachments/assets/761442a3-01b0-45cb-b40a-26cf7121706b) ![image](https://github.com/user-attachments/assets/bd5c8a79-7d38-41b0-b4a4-318b4a5ae80c)
 
-                                                                                # CREANDO DEPLOYMENT EN KUBERNETES(N8N)
+                                                                                
 _______________________________________________________________________________________________________________________________________________________________________________________________________________
 
 En este Proyecto veremos cómo activar Kubernetes dentro de Docker Desktop y crear un deployment para ejecutar N8N en contenedores. Asimismo, iremos aprendiendo paso a paso a cómo habilitar Kubernetes desde la configuración de Docker, esperar a que el sistema instale los componentes necesarios y verificar que el clúster esté funcionando correctamente antes de comenzar a desplegar servicios.
@@ -36,75 +36,77 @@ CREANDO DEPLOYMENT EN KUBERNETES(N8N)
 
  ![image](https://github.com/user-attachments/assets/130c4534-d529-437e-98cc-2a12e8aa8ee4)
 
-•	Luego damos click derecho al archivo y pegamos el siguiente código: 
+• Luego damos click derecho al archivo y pegamos el siguiente código: 
 
 
-apiVersion: apps/v1             # versión 1
+     apiVersion: apps/v1                   # versión 1
 
-kind: Deployment                 #Construye el contenedor.
+     kind: Deployment                      #Construye el contenedor.
 
-metadata:
+     metadata:
 
-  name: n8n                           # nombre del contenedor.
+       name: n8n                           # nombre del contenedor.
   
-spec:
+     spec:
 
-  replicas: 1                            #cantidadde contenedores que deseas correr.
+       replicas: 1                            #cantidadde contenedores que deseas correr.
   
-  selector:
+       selector:
   
-    matchLabels:
+         matchLabels:
     
-      app: n8n                          #jala del deployment todo lo de n8n.
+           app: n8n                          #jala del deployment todo lo de n8n.
       
-  template:
+       template:
   
-    metadata:
+         metadata:
     
-      labels:
+           labels:
       
-        app: n8n                      #el contenedor se llamará n8n.
+             app: n8n                      #el contenedor se llamará n8n.
         
-    spec:
+         spec:
     
-      containers:
+           containers:
       
-      - name: n8n                  # <-- OJO: Empieza con guion y 2 espacios
+           - name: n8n                  # <-- OJO: Empieza con guion y 2 espacios
       
-        image: n8nio/n8n:latest    # <-- 4 espacios desde el margen izquierdo
+             image: n8nio/n8n:latest    # <-- 4 espacios desde el margen izquierdo
         
-        ports:
+             ports:
         
-        - containerPort: 5678      # <-- OJO: Empieza con guion y 4 espacios
+             - containerPort: 5678      # <-- OJO: Empieza con guion y 4 espacios
         
----
 
-apiVersion: v1
 
-kind: Service                               # Ejecuta el contenedor.
+     apiVersion: v1
 
-metadata:
+     kind: Service                               # Ejecuta el contenedor.
 
-  name: n8n-service
+     metadata:
+
+       name: n8n-service
   
-spec:
+     spec:
 
-  type: NodePort      # lee los contenedores y saca la información a través de un puerto.
+       type: NodePort      # lee los contenedores y saca la información a través de un puerto.
   
-  selector:
+       selector:
   
-    app: n8n
+         app: n8n
     
-  ports:
+       ports:
   
-  - port: 5678                    # <-- OJO: Empieza con guion y 2 espacios
+       - port: 5678                    # <-- OJO: Empieza con guion y 2 espacios
     
-    targetPort: 5678         #puerto de servicio que va alimentar al NodePort.
+         targetPort: 5678         #puerto de servicio que va alimentar al NodePort.
     
-    nodePort: 30007
+         nodePort: 30007
 
 
-•	Guardamos el archivo y abrimos el powershell (terminal), para abrir el archivo kubernetes directo a la terminal tendremos que ir primero a la carpeta y hacemos click en la parte superior donde esta la ruta de la carpeta y luego escribimos cmd y presionamos enter y, así abrirá el terminal directo en la carpeta de kubernetes.
+![IMAGE](https://github.com/user-attachments/assets/3a213951-769c-4cab-ab76-29019b1a9f4d)
+
+• Guardamos el archivo y abrimos el powershell (terminal), para abrir el archivo kubernetes directo a la terminal tendremos que ir primero a la carpeta y hacemos click en la parte superior donde esta la ruta de la carpeta y luego escribimos cmd y presionamos enter y, así abrirá el terminal directo en la carpeta de kubernetes.
 
  ![image](https://github.com/user-attachments/assets/bfb97620-817d-4c5c-b7e8-574b21551053)
 
@@ -112,9 +114,9 @@ spec:
 
 •	Ahora en la terminal escribimos el siguiente comando: kubectl apply -f n8n.yaml
 
-1.	Kubectl -- llama al ejecutable de Kubernetes.
+1.	Kubectl           -- llama al ejecutable de Kubernetes.
    
-2.	Apply  -f   -- vamos aplicar las configuraciones que tenemos en el archivo n8n.yaml
+2.	Apply  -f          -- vamos aplicar las configuraciones que tenemos en el archivo n8n.yaml
  
 ![image](https://github.com/user-attachments/assets/8f5f0fb6-54c5-4213-918f-137f1d67e42b)
 
